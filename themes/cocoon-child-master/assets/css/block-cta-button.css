@@ -1,0 +1,39 @@
+/* ===================================
+   CTAボタン
+   =================================== */
+.custom-cta-button {
+  border-radius: 8px !important;
+  padding: 15px 30px !important;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.2s;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+  border: none;
+  letter-spacing: 0.05em;
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+}
+
+.custom-cta-button:hover {
+  transform: translateY(2px);
+  opacity: 0.95;
+}
+
+.custom-cta-button::after {
+  content: "→";
+  position: absolute;
+  right: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: bold;
+  font-size: 1.2em;
+  z-index: 2;
+}
+
+.summary-cta-button {
+  /* サマリーランキング内のCTAボタンのスタイルはこちらに記述 */
+}

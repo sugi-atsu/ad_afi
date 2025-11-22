@@ -1,0 +1,12 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "custom-blocks/dynamic-ranking",
+    "version": "0.1.0",
+    "title": "[LP] 動的ランキング",
+    "category": "lp-parts",
+    "icon": "awards",
+    "description": "カスタムフィールドのデータと順序に基づき、ランキングを自動生成します。",
+    "render": "file:./render.php",
+    "editorScript": "file:./editor.js"
+}

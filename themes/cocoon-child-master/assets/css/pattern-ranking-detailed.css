@@ -1,0 +1,387 @@
+/* ===================================
+   【最終FIX・divレイアウト版】パターン: ランキング詳細
+   =================================== */
+/* ランキング順位バッジ */
+.ranking-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  flex-shrink: 0;
+  font-weight: bold;
+  line-height: 1.2;
+  /* 4位以降のテキストバッジのデフォルトスタイル */
+  background-color: #385888; /* 少し薄い青に変更 */
+  color: #fff; /* 白抜き */
+  border-radius: 5px; /* 少し丸い角 */
+  padding: 8px 15px; /* 横長長方形になるように調整 */
+  width: auto;
+  height: auto;
+}
+
+/* 1-3位の画像用スタイル */
+.ranking-badge.rank-1,
+.ranking-badge.rank-2,
+.ranking-badge.rank-3 {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  width: 80px; /* 円形バッジのサイズ */
+  height: auto;
+  border-radius: 0; /* 円形を解除 */
+  padding: 0; /* 円形バッジはパディング不要 */
+}
+
+.ranking-card__header {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #213457;
+  padding-bottom: 15px;
+}
+
+.ranking-card__header-flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ranking-card__header-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.product-title-group {
+  flex: 1;
+}
+
+.ranking-card__header-sub {
+  flex-shrink: 0;
+}
+
+.ranking-card__product-name a {
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.ranking-card__product-name a:hover {
+  text-decoration: underline;
+}
+
+.ranking-card__product-name {
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: left;
+  margin: 0;
+}
+
+.ranking-card__catchphrase {
+  font-size: 22px;
+  font-weight: bold;
+  margin: 5px 0 0 0;
+  line-height: 1.5;
+  color: #d10d19;
+  text-align: left;
+}
+
+.ranking-card__overall-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 10px;
+  border: 2px solid #213457;
+  border-radius: 4px;
+  color: #213457;
+}
+.ranking-card__overall-rating-label {
+  font-weight: bold;
+  font-size: 14px;
+}
+.ranking-card__overall-rating-stars {
+  font-size: 18px;
+  letter-spacing: 2px;
+  color: #ff9900;
+}
+
+/* メインコンテンツ */
+.ranking-card__main-content {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.ranking-card__image-column {
+  flex: 0 0 200px;
+}
+.ranking-card__image-column img {
+  width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+}
+
+.ranking-card__info-column {
+  flex: 1;
+  min-width: 0;
+}
+
+/* テーブル共通 */
+.ranking-card__table {
+  width: 100%;
+  border: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+.ranking-card__table:last-child {
+  margin-bottom: 0;
+}
+
+.ranking-card__table-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.ranking-card__table-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  border-bottom: 1px solid #ddd;
+}
+.ranking-card__table-grid .ranking-card__table-item:nth-child(odd) {
+  border-right: 1px solid #ddd;
+}
+.ranking-card__table-grid .ranking-card__table-item:nth-last-child(1),
+.ranking-card__table-grid
+  .ranking-card__table-item:nth-last-child(2):nth-child(odd) {
+  border-bottom: none;
+}
+
+.table-item__header,
+.table-item__data {
+  padding: 10px;
+  align-self: center;
+  font-size: 14px;
+}
+
+.table-item__header {
+  font-weight: bold;
+  text-align: center;
+  color: #fff;
+  border-right: 1px solid #ddd;
+}
+.table-item__data {
+  padding-left: 15px;
+}
+
+.ranking-card__rating-table .table-item__header {
+  background-color: #213457;
+}
+.ranking-card__spec-table .table-item__header {
+  background-color: #6c757d;
+}
+
+.ranking-card__table .stars {
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #ff9900;
+}
+
+/* 商材説明詳細 */
+.product-detail {
+  position: relative;
+  margin-top: 30px;
+  border-radius: 6px; /* 角を少し丸める */
+  background-color: #f9f9f9; /* 非常に薄いグレーの背景色 */
+  border: 1px solid #ddd; /* 主張しすぎない細い枠線 */
+  overflow: hidden; /* タイトル部分の背景色が角丸からはみ出ないように */
+
+  /* ★不要なスタイルを削除 */
+  padding: 0;
+  box-shadow: none;
+}
+
+/* ★不要：吹き出しのしっぽを非表示に */
+.product-detail::before,
+.product-detail::after {
+  display: none;
+}
+
+/* タイトル部分のラッパー */
+.product-detail__title-wrapper {
+  /* ★レイアウトとデザインをシンプルに */
+  display: block; /* Flexboxである必要がないためblock要素に */
+  background-color: #f0f0f0; /* 背景色と区別がつく程度のグレー */
+  color: #333; /* テキストの色 */
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 20px;
+  border-bottom: 1px solid #ddd; /* コンテンツとの区切り線 */
+
+  /* ★不要なスタイルをリセット */
+  position: static;
+  transform: none;
+  border-radius: 0;
+  box-shadow: none;
+  white-space: normal;
+  gap: 0;
+  align-items: normal;
+}
+
+/* ★不要：アイコンを非表示に */
+.product-detail__title-wrapper::before {
+  display: none;
+}
+
+/* 本文やアバターを含むメインコンテンツエリア */
+.product-detail__main-content {
+  padding: 25px; /* 内側の余白を確保 */
+  margin-top: 0;
+}
+
+/* テキストコンテンツエリア */
+.product-detail__text-content {
+  /* flexアイテムではなくなったため、flex: 1; は不要 */
+}
+
+/* テキスト内の小見出し */
+.product-detail__title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #222; /* 少し濃いめの文字色 */
+}
+
+/* テキスト本文 */
+.product-detail__text {
+  font-size: 15px;
+  line-height: 1.8; /* 行間を広めに取って読みやすさを確保 */
+}
+
+/* フッター */
+.ranking-card__footer {
+  margin-top: 25px;
+  text-align: center;
+}
+.ranking-card__cta-microcopy {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #d10d19;
+}
+.ranking-card__cta-button {
+  font-size: 24px !important;
+  padding: 20px 30px !important;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* ★★★ここからが今回の修正箇所★★★ */
+
+/* 1. キーフレームの定義：光が「左から右へ」移動するように変更 */
+@keyframes shine-and-grow-sweep {
+  /* 0% から 80% まで：待機フェーズ */
+  0%,
+  80% {
+    left: -180px;
+    opacity: 0.5;
+    transform: scale(0.9) rotate(25deg);
+  }
+
+  /* 81% の瞬間：アクション開始 */
+  81% {
+    opacity: 1;
+    transform: scale(1) rotate(25deg);
+  }
+
+  /* ★変更点★ 99% の地点を追加 */
+  /* アニメーションのほぼ終わりまで、光は完全に見え続ける */
+  99% {
+    left: 100%; /* この時点で右端に到達 */
+    opacity: 1; /* ★重要：まだ消えない */
+    transform: scale(1.5) rotate(25deg);
+  }
+
+  /* 100% の地点：右端に到達した直後に消える */
+  100% {
+    left: 100%;
+    opacity: 0; /* ★ここで初めて消える */
+    transform: scale(1.5) rotate(25deg);
+  }
+}
+
+/* 2. ::before 疑似要素のスタイル */
+.ranking-card__cta-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -180px;
+  width: 180px;
+  height: 200%;
+  /* transformプロパティはキーフレーム内で制御するため、ここからは削除 */
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgb(224, 224, 224) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  opacity: 0;
+
+  /* 調整はここで行う */
+  --total-cycle-duration: 3s;
+
+  /* アニメーション設定 */
+  animation-name: shine-and-grow-sweep; /* 新しいキーフレーム名を指定 */
+  animation-duration: var(--total-cycle-duration);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ranking-badge .rank-text {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.ranking-badge .ranking-badge-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: none;
+  border: none;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  .ranking-card__main-content {
+    flex-direction: column;
+  }
+  .ranking-card__image-column {
+    flex-basis: auto;
+    max-width: 200px;
+    margin: 0 auto;
+  }
+  .ranking-card__table-grid {
+    grid-template-columns: 1fr;
+  }
+  .ranking-card__table-grid .ranking-card__table-item:last-child {
+    border-bottom: none;
+  }
+
+  .product-detail__main-content {
+    /* display: flexがなくなったため不要 */
+  }
+  .product-detail::before,
+  .product-detail::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .ranking-badge {
+    width: 65px;
+    height: 65px;
+    border: 3px solid #fff;
+  }
+  .ranking-badge.rank-4,
+  .ranking-badge.rank-5,
+  .ranking-badge.rank-6 {
+    padding: 6px 12px; /* モバイルでのパディング調整 */
+  }
+}

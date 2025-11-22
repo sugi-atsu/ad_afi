@@ -1,0 +1,36 @@
+{
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 2,
+    "name": "custom-blocks/cta-button",
+    "version": "0.1.0",
+    "title": "カスタムCTAボタン",
+    "category": "design",
+    "icon": "megaphone",
+    "description": "クリックを促すためのカスタマイズ可能なボタンです。",
+    "keywords": [ "button", "cta", "link", "btn" ],
+    "supports": {
+        "html": false,
+        "align": [ "wide", "full" ]
+    },
+    "attributes": {
+        "text": {
+            "type": "string"
+        },
+        "url": {
+            "type": "string",
+            "default": "#"
+        },
+        "opensInNewTab": {
+            "type": "boolean",
+            "default": false
+        },
+        "backgroundColor": {
+            "type": "string"
+        },
+        "textColor": {
+            "type": "string"
+        }
+    },
+    "editorScript": "file:./editor.js",
+    "render": "file:./render.php"
+}

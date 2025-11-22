@@ -1,0 +1,75 @@
+/* ===================================
+   LPテンプレート共通レイアウト
+   =================================== */
+
+/* LPテンプレートが適用されているページ全体に適用 */
+.lp-template .content-in {
+  /* Cocoonが設定している左右のpaddingを打ち消す */
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* 本文のメインエリア(#primary)を全幅にする */
+.lp-template #primary {
+  width: 100%; /* 幅を100%に設定 */
+  float: none; /* floatを解除 */
+  margin: 0; /* 不要なマージンをリセット */
+}
+
+/* ===================================
+   LPテンプレート共通 基本設定
+   =================================== */
+body.lp-template {
+  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* 全てのブロックの上下マージンを統一 */
+.main > .wp-block-group,
+.main > .wp-block-heading,
+.main > .wp-block-table,
+.main > .custom-cta-button,
+.main > .lp-intro-text {
+  margin-bottom: 30px;
+}
+
+/* 導入文 (参考サイト: la_main_text) */
+.lp-intro-text {
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+/* ===================================
+   セクション用デザイン
+   =================================== */
+
+/* 白い背景のカード型セクション */
+.lp-section {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 1px 1px 2px rgba(0%, 0%, 0%, 0.2),
+    1px -1px 2px rgba(0%, 0%, 0%, 0.2), -1px 1px 2px rgba(0%, 0%, 0%, 0.2),
+    -1px -1px 2px rgba(0%, 0%, 0%, 0.2);
+  border: 1px solid #dddddd;
+  padding: 25px 20px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* セクションタイトル */
+.lp-section-title {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 12px 15px;
+  border-radius: 8px 8px 0 0;
+  margin: -25px -20px 20px -20px;
+  text-align: center;
+  box-shadow: 1px 1px 2px rgba(0%, 0%, 0%, 0.2);
+  letter-spacing: 0.05em;
+}

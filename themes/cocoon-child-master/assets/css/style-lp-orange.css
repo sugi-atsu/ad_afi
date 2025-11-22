@@ -1,0 +1,214 @@
+/* ===================================
+   LPオレンジテンプレート専用スタイル
+   =================================== */
+
+body.page-template-page-lp-orange {
+  background-color: #f3f3f3; /* 参考サイトと同じグレー背景 */
+  color: #444; /* 参考サイトのテキストカラー */
+}
+
+.page-template-page-lp-orange .main {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 10px 80px 10px;
+  background-color: transparent;
+  box-shadow: none;
+}
+
+/* ===================================
+   セクション用デザイン（参考サイト準拠）
+   =================================== */
+
+/* 白い背景のカード型セクション */
+
+/* セクションタイトル (例: 編集部おすすめサービス) */
+.lp-section-title {
+  background-color: #213457; /* 参考サイトの濃紺 */
+  color: #fff;
+}
+
+/* ===================================
+   ランキングカード詳細デザイン
+   =================================== */
+
+/* ランキングカードのタイトル */
+.ranking-card__title {
+  color: #213457; /* 参考サイトの濃紺 */
+  border-bottom: 3px solid #ff7700; /* 参考サイトのオレンジ */
+}
+
+.ranking-card__title::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  background-color: #213457;
+}
+
+/* サブタイトル（キャッチコピー） */
+.ranking-card__subtitle {
+  color: #ff7700; /* 参考サイトのオレンジ */
+  background: linear-gradient(
+    transparent 60%,
+    gold 60%
+  ); /* 参考サイトと同じマーカー */
+}
+
+/* スペック表 */
+.ranking-card__spec-table th {
+  background-color: #eeeeee; /* 参考サイトのライトグレー */
+  color: #444;
+}
+
+/* ===================================
+   編集部コメント（参考サイト準拠）
+   =================================== */
+.editor-comment-new {
+  background-color: #fff4cb; /* 参考サイトの薄黄色 */
+  border: 2px solid #ffd700;
+}
+
+.editor-comment-new::before {
+  border-bottom: 12px solid #ffd700;
+}
+
+.editor-comment-new::after {
+  border-bottom: 10px solid #fff4cb;
+}
+
+.editor-comment-new__title {
+  background-color: #33aa55; /* 参考サイトの緑 */
+  color: #fff;
+}
+
+.editor-comment-new__text p {
+  color: #444;
+}
+
+.editor-comment-new__text strong {
+  background: linear-gradient(
+    transparent 60%,
+    gold 60%
+  ); /* 参考サイトと同じマーカー */
+  color: #bd1e1e; /* 参考サイトの赤 */
+}
+
+/* ===================================
+   CTAボタン（参考サイト完全準拠）
+   =================================== */
+.custom-cta-button {
+  background: linear-gradient(
+    to bottom,
+    #ff9933 0%,
+    #ff7700 50%,
+    #ee6600 100%
+  ) !important; /* 参考サイトのオレンジグラデーション */
+  color: #fff !important;
+  box-shadow: 0 4px 0 #cc5500, 1px 1px 2px rgba(0%, 0%, 0%, 0.2) !important; /* 参考サイトと同じ影 */
+}
+
+.custom-cta-button:hover {
+  box-shadow: 0 2px 0 #cc5500, 1px 1px 2px rgba(0%, 0%, 0%, 0.2) !important;
+}
+
+/* ===================================
+   ランキング順位バッジ（参考サイト準拠）
+   =================================== */
+
+/* ===================================
+   比較表デザイン
+   =================================== */
+
+#dynamic-comparison-table-app th {
+  background-color: #213457; /* 参考サイトの濃紺 */
+  color: #fff;
+}
+
+#dynamic-comparison-table-app td:first-child {
+  background-color: #eeeeee; /* 参考サイトのライトグレー */
+  color: #444;
+}
+
+/* ===================================
+   レスポンシブ対応
+   =================================== */
+@media (max-width: 768px) {
+  .page-template-page-lp-orange .main {
+    padding: 15px 8px 50px 8px;
+  }
+
+  .lp-section {
+    padding: 20px 12px;
+    margin: -20px -12px 15px -12px;
+    top: -15px;
+    left: -15px;
+  }
+}
+
+/* ===================================
+   装飾用アクセント
+   =================================== */
+
+/* ===================================
+   参考サイトのユーティリティクラス追加
+   =================================== */
+
+/* テキストカラー */
+.orange {
+  color: #ff7700 !important;
+}
+.navy {
+  color: #213457 !important;
+}
+.red {
+  color: #bd1e1e !important;
+}
+.b {
+  font-weight: bold !important;
+}
+
+/* 黄色マーカー */
+.yellow_line,
+.bgyellow {
+  background: linear-gradient(transparent 60%, gold 60%);
+}
+
+/* ===================================
+   【NEW & REFINED】選び方ガイドセクション
+   =================================== */
+
+/* 青背景バージョン (既存) */
+.wp-block-group.has-very-light-gray-background-color {
+  background-color: #d1eaff !important; /* 参考サイトの青背景 */
+  border: 1px solid #a8d8ff;
+}
+.wp-block-group.has-very-light-gray-background-color h2,
+.wp-block-group.has-very-light-gray-background-color h3,
+.wp-block-group.has-very-light-gray-background-color p {
+  color: #213457;
+}
+
+.summary-cta-button {
+  display: block;
+  background: linear-gradient(to bottom, #ff9933 0%, #ff7700 100%);
+  color: #fff !important;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  font-size: 16px;
+  padding: 15px 5px;
+  border-radius: 8px;
+  box-shadow: 0 4px 0 #cc5500;
+  transition: all 0.2s;
+  position: relative;
+}
+.summary-cta-button:hover {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #cc5500;
+}
+.summary-cta-button::after {
+  content: "▶";
+  font-size: 0.7em;
+  margin-left: 8px;
+  vertical-align: middle;
+}
