@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (summaryContainer && items.length > 0) {
     let summaryHTML = `
             <div class="wp-block-group lp-summary-ranking">
-                <h2 class="wp-block-heading has-text-align-center lp-summary-ranking__title">【ITエンジニア】おすすめTOP${items.length}</h2>
+                <h2 class="wp-block-heading has-text-align-center lp-summary-ranking__title">${window.rankingLpData?.sectionTitle || ""}</h2>
                 <div class="wp-block-group lp-summary-ranking__body">
         `;
     items.forEach((item, index) => {
