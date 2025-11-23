@@ -15,4 +15,5 @@
 !themes/
 !themes/cocoon-child-master/
 !themes/cocoon-child-master/**
-
+tmp-user
+-patterns

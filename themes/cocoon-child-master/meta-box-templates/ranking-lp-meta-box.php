@@ -12,7 +12,25 @@ if (!defined('ABSPATH')) exit;
 <button type="button" id="add-ranking-item-btn" class="button button-primary">商材を追加</button>
 
 <!-- データ保存用の隠しtextarea -->
-<textarea name="ranking_lp_json_data" id="ranking-lp-json-data" style="display:none;"><?php echo esc_attr($json_data); ?></textarea>
+<!-- データ保存用の隠しtextarea -->
+<?php
+// textareaには常にBase64を入れる（JSの互換性のため、あるいはJS側でBase64を期待するようにする）
+// $json_data は functions.php の show_ranking_lp_meta_box_html で取得されているはずだが、
+// ここで再取得するか、functions.php から渡される変数を考慮する。
+// show_ranking_lp_meta_box_html では $json_data = get_post_meta(...) している。
+// それがBase64かJSONか判定して、textareaにはBase64を入れるのが安全。
+
+$saved_data_for_textarea = $json_data; // functions.phpから渡された値
+$first_char = substr(trim($saved_data_for_textarea), 0, 1);
+if ($first_char === '{' || $first_char === '[') {
+    // JSONならBase64エンコード
+    $value_for_textarea = base64_encode($saved_data_for_textarea);
+} else {
+    // すでにBase64ならそのまま
+    $value_for_textarea = $saved_data_for_textarea;
+}
+?>
+<textarea name="ranking_lp_json_data" id="ranking-lp-json-data" style="display:none;"><?php echo esc_textarea($value_for_textarea); ?></textarea>
 
 <!-- JSで「商材」全体を複製するためのテンプレート -->
 <div id="ranking-item-template" style="display:none;">
