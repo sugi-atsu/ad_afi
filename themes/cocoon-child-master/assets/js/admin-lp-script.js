@@ -65,7 +65,8 @@
       wrapper.empty();
       let initialData = [];
       // 優先的に wp_localize_script で渡されたデータを使用
-      if (typeof rankingLpAdminData !== 'undefined' && rankingLpAdminData.items) {
+      // ただし、nullの場合は無視してフォールバック（textarea）を使う
+      if (typeof rankingLpAdminData !== 'undefined' && Array.isArray(rankingLpAdminData.items)) {
         initialData = rankingLpAdminData.items;
       } else {
         // フォールバック: textareaから読み込み

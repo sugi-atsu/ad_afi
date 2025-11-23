@@ -1,0 +1,71 @@
+[2025-11-23 17:11:37] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:11:37] Frontend loaded meta length: 2240
+[2025-11-23 17:11:37] Frontend decoded Base64 successfully.
+[2025-11-23 17:11:37] Frontend JSON Decode Success. Items count: 2
+[2025-11-23 17:12:35] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:12:35] Frontend loaded meta length: 2240
+[2025-11-23 17:12:35] Frontend decoded Base64 successfully.
+[2025-11-23 17:12:35] Frontend JSON Decode Success. Items count: 2
+[2025-11-23 17:13:14] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:13:14] Frontend loaded meta length: 2240
+[2025-11-23 17:13:14] Frontend decoded Base64 successfully.
+[2025-11-23 17:13:14] Frontend JSON Decode Success. Items count: 2
+[2025-11-23 17:17:31] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:17:31] Frontend loaded meta length: 2240
+[2025-11-23 17:17:31] Frontend decoded Base64 successfully.
+[2025-11-23 17:17:31] Frontend JSON Decode Success. Items count: 2
+[2025-11-23 17:17:43] LOAD: Post ID 56
+[2025-11-23 17:17:43] Loaded meta data length: 2240
+[2025-11-23 17:17:43] Decoded Base64 to JSON.
+[2025-11-23 17:17:59] SAVE START: Post ID 56
+[2025-11-23 17:17:59] Raw POST data length: 2240
+[2025-11-23 17:17:59] Raw POST data length: 0
+[2025-11-23 17:17:59] Data empty. Deleted meta.
+[2025-11-23 17:17:59] LOAD: Post ID 56
+[2025-11-23 17:17:59] Loaded meta data length: 0
+[2025-11-23 17:17:59] Base64 decode failed or empty.
+[2025-11-23 17:17:59] JSON Decode Error: Syntax error
+[2025-11-23 17:18:03] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:18:03] Frontend loaded meta length: 0
+[2025-11-23 17:18:03] Frontend Base64 decode FAILED.
+[2025-11-23 17:18:03] Frontend JSON Decode Error: Syntax error
+[2025-11-23 17:20:17] LOAD: Post ID 56
+[2025-11-23 17:20:17] Loaded meta data length: 0
+[2025-11-23 17:20:17] Base64 decode failed or empty.
+[2025-11-23 17:20:17] JSON Decode Error: Syntax error
+[2025-11-23 17:20:29] SAVE START: Post ID 56
+[2025-11-23 17:20:29] Raw POST data length: 404
+[2025-11-23 17:20:29] Raw POST data length: 0
+[2025-11-23 17:20:29] Data empty. Deleted meta.
+[2025-11-23 17:20:30] LOAD: Post ID 56
+[2025-11-23 17:20:30] Loaded meta data length: 0
+[2025-11-23 17:20:30] Base64 decode failed or empty.
+[2025-11-23 17:20:30] JSON Decode Error: Syntax error
+[2025-11-23 17:20:33] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:20:33] Frontend loaded meta length: 0
+[2025-11-23 17:20:33] Frontend Base64 decode FAILED.
+[2025-11-23 17:20:33] Frontend JSON Decode Error: Syntax error
+[2025-11-23 17:20:37] LOAD: Post ID 56
+[2025-11-23 17:20:37] Loaded meta data length: 0
+[2025-11-23 17:20:37] Base64 decode failed or empty.
+[2025-11-23 17:20:37] JSON Decode Error: Syntax error
+[2025-11-23 17:25:43] LOAD: Post ID 56
+[2025-11-23 17:25:43] Loaded meta data length: 0
+[2025-11-23 17:25:43] Base64 decode failed or empty.
+[2025-11-23 17:25:43] JSON Decode Error: Syntax error
+[2025-11-23 17:25:52] SAVE START: Post ID 56
+[2025-11-23 17:25:52] Raw POST data length: 408
+[2025-11-23 17:25:52] Raw POST data length: 0
+[2025-11-23 17:25:52] Data empty. Updated meta to empty string.
+[2025-11-23 17:25:53] LOAD: Post ID 56
+[2025-11-23 17:25:53] Loaded meta data length: 0
+[2025-11-23 17:25:53] Base64 decode failed or empty.
+[2025-11-23 17:25:53] JSON Decode Error: Syntax error
+[2025-11-23 17:25:55] LOAD: Post ID 56
+[2025-11-23 17:25:55] Loaded meta data length: 0
+[2025-11-23 17:25:55] Base64 decode failed or empty.
+[2025-11-23 17:25:55] JSON Decode Error: Syntax error
+[2025-11-23 17:26:05] FRONTEND LOAD: Post ID 56
+[2025-11-23 17:26:05] Frontend loaded meta length: 0
+[2025-11-23 17:26:05] Frontend Base64 decode FAILED.
+[2025-11-23 17:26:05] Frontend JSON Decode Error: Syntax error

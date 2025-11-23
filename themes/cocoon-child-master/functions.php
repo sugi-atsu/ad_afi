@@ -53,6 +53,7 @@ function show_ranking_lp_meta_box_html($post)
 {
     wp_nonce_field('save_ranking_data_action', 'ranking_data_nonce');
     $json_data = get_post_meta($post->ID, '_cl_ranking_lp_data', true);
+    $section_title = get_post_meta($post->ID, '_cl_ranking_lp_section_title', true); // タイトル取得
     $template_path = get_stylesheet_directory() . '/meta-box-templates/ranking-lp-meta-box.php';
     if (file_exists($template_path)) {
         require($template_path);
@@ -99,16 +100,31 @@ function save_ranking_lp_meta_box_data($post_id, $post)
         $first_char = substr(trim($raw_data), 0, 1);
         if ($first_char !== '{' && $first_char !== '[') {
             // Base64のまま保存する (DB保存時の破損を防ぐため)
-            update_post_meta($post_id, '_cl_ranking_lp_data', $raw_data);
-            write_lp_debug_log("Saved as Base64. Length: " . strlen($raw_data));
+            $json_data = $raw_data;
+            write_lp_debug_log("Detected Base64 format. Keeping as is.");
         } else {
             // 従来のJSON生データの場合は、Base64に変換して保存する
-            $base64_data = base64_encode(wp_unslash($raw_data));
-            update_post_meta($post_id, '_cl_ranking_lp_data', $base64_data);
-            write_lp_debug_log("Converted raw JSON to Base64 and saved. Length: " . strlen($base64_data));
+            $json_data = base64_encode(wp_unslash($raw_data));
+            write_lp_debug_log("Detected Raw JSON. Converted to Base64.");
+        }
+
+        write_lp_debug_log("Processed data length: " . strlen($json_data));
+        
+        if (empty($json_data)) {
+            // データが空でもキーを削除せず、空文字として保存する（誤って削除されるのを防ぐため）
+            update_post_meta($post_id, '_cl_ranking_lp_data', '');
+            write_lp_debug_log("Data empty. Updated meta to empty string.");
+        } else {
+            update_post_meta($post_id, '_cl_ranking_lp_data', $json_data);
+            write_lp_debug_log("Updated meta. Data length: " . strlen($json_data));
         }
     } else {
         write_lp_debug_log("No ranking_lp_json_data in POST.");
+    }
+
+    // セクションタイトルの保存
+    if (isset($_POST['ranking_lp_section_title'])) {
+        update_post_meta($post_id, '_cl_ranking_lp_section_title', sanitize_text_field($_POST['ranking_lp_section_title']));
     }
 }
 add_action('save_post_page', 'save_ranking_lp_meta_box_data', 10, 2);
@@ -152,9 +168,11 @@ function load_lp_admin_scripts($hook)
         $items_data = json_decode($json_data, true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             write_lp_debug_log("JSON Decode Error: " . json_last_error_msg());
+            $items_data = null; // デコード失敗時はnullにする
         }
         
-        wp_localize_script('admin-lp-script', 'rankingLpAdminData', array('items' => is_array($items_data) ? $items_data : []));
+        // itemsがnullの場合はJS側でフォールバックが動くようにする
+        wp_localize_script('admin-lp-script', 'rankingLpAdminData', array('items' => is_array($items_data) ? $items_data : null));
 
         wp_enqueue_style('admin-lp-style', get_stylesheet_directory_uri() . '/assets/css/admin-lp-style.css', array(), filemtime(get_stylesheet_directory() . '/assets/css/admin-lp-style.css'));
     }
@@ -241,7 +259,12 @@ function enqueue_lp_front_scripts()
             write_lp_debug_log("Frontend JSON Decode Success. Items count: " . (is_array($items_data) ? count($items_data) : 0));
         }
 
-        wp_localize_script('lp-front-script', 'rankingLpData', array('items' => is_array($items_data) ? $items_data : []));
+        $section_title = get_post_meta($post->ID, '_cl_ranking_lp_section_title', true);
+        
+        wp_localize_script('lp-front-script', 'rankingLpData', array(
+            'items' => is_array($items_data) ? $items_data : [],
+            'sectionTitle' => $section_title
+        ));
     }
 
     // 共通のブロックスタイル

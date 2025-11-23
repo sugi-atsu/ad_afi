@@ -6,6 +6,11 @@ if (!defined('ABSPATH')) exit;
 ?>
 
 <!-- 商品アイテムが追加されるラッパー -->
+<p>
+    <label for="ranking-lp-section-title" style="font-weight:bold;">ランキングセクションタイトル:</label><br>
+    <input type="text" name="ranking_lp_section_title" id="ranking-lp-section-title" value="<?php echo isset($section_title) ? esc_attr($section_title) : ''; ?>" style="width: 100%; max-width: 600px;">
+</p>
+<hr>
 <div id="ranking-items-wrapper"></div>
 
 <!-- 「商品を追加」ボタン -->

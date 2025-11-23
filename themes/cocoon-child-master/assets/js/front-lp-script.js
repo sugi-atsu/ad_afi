@@ -40,18 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="wp-block-group lp-summary-ranking__item">
                     <div class="ranking-badge-summary rank-${rank}">${badgeHTML}</div>
                     <div class="wp-block-group ranking-item__logo-area">
-                        <figure class="wp-block-image"><img src="${
-                          item.imageUrl || ""
-                        }" alt="${item.productName || ""} ロゴ"></figure>
-                        <p class="has-text-align-center"><a href="${
-                          item.affiliateLink || "#"
-                        }">${item.productName || ""}</a></p>
+                        <figure class="wp-block-image"><img src="${item.imageUrl || ""
+        }" alt="${item.productName || ""} ロゴ"></figure>
+                        <p class="has-text-align-center"><a href="${item.affiliateLink || "#"
+        }">${item.productName || ""}</a></p>
                     </div>
                     <div class="wp-block-group ranking-item__features">${featuresHTML}</div>
                     <div class="wp-block-group ranking-item__cta">
-                        <p><a class="summary-cta-button" href="${
-                          item.affiliateLink || "#"
-                        }">公式<br>サイト</a></p>
+                        <p><a class="summary-cta-button" href="${item.affiliateLink || "#"
+        }">公式<br>サイト</a></p>
                     </div>
                 </div>
             `;
@@ -127,9 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       tableHTML += "<tr><td></td>";
       items.forEach((item) => {
-        tableHTML += `<td><a href="${
-          item.affiliateLink || "#"
-        }" class="custom-cta-button" target="_blank" rel="noopener sponsored">公式サイトへ</a></td>`;
+        tableHTML += `<td><a href="${item.affiliateLink || "#"
+          }" class="custom-cta-button" target="_blank" rel="noopener sponsored">公式サイトへ</a></td>`;
       });
       tableHTML += "</tr>";
 
@@ -144,6 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // ===================================
   const rankingContainer = document.getElementById("dynamic-ranking-app");
   if (rankingContainer) {
+    // セクションタイトルの更新
+    if (window.rankingLpData?.sectionTitle) {
+      const sectionTitleEl = rankingContainer.closest('.lp-section')?.querySelector('.lp-section-title');
+      if (sectionTitleEl) {
+        sectionTitleEl.textContent = window.rankingLpData.sectionTitle;
+      }
+    }
+
     if (items.length === 0) {
       rankingContainer.innerHTML =
         "<p>ランキングに表示する商品がありません。</p>";
@@ -184,8 +188,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="ranking-card__table-item">
                         <div class="table-item__header">${rItem.label}</div>
                         <div class="table-item__data"><span class="stars">${renderStars(
-                          rItem.value
-                        )}</span></div>
+              rItem.value
+            )}</span></div>
                     </div>
                 `;
           });
@@ -201,8 +205,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="ranking-card__table-item">
                         <div class="table-item__header">${sItem.label}</div>
                         <div class="table-item__data">${(
-                          sItem.value || ""
-                        ).replace(/\n/g, "<br>")}</div>
+                sItem.value || ""
+              ).replace(/\n/g, "<br>")}</div>
                     </div>
                 `;
           });
@@ -217,22 +221,19 @@ document.addEventListener("DOMContentLoaded", function () {
                             <div class="ranking-card__header-main">
                                 <div class="ranking-badge rank-${rank}">${badgeHTML}</div>
                                 <div class="product-title-group">
-                                    <a href="${
-                                      item.affiliateLink || "#"
-                                    }"><h2 class="ranking-card__product-name">${
-          item.productName || "商材名"
-        }</h2></a>
-                                    <h3 class="ranking-card__catchphrase">${
-                                      item.catchphrase || ""
-                                    }</h3>
+                                    <a href="${item.affiliateLink || "#"
+          }"><h2 class="ranking-card__product-name">${item.productName || "商材名"
+          }</h2></a>
+                                    <h3 class="ranking-card__catchphrase">${item.catchphrase || ""
+          }</h3>
                                 </div>
                             </div>
                             <div class="ranking-card__header-sub">
                                 <div class="ranking-card__overall-rating">
                                     <span class="ranking-card__overall-rating-label">総合評価</span>
                                     <span class="ranking-card__overall-rating-stars">${renderStars(
-                                      item.overallRating
-                                    )}</span>
+            item.overallRating
+          )}</span>
                                 </div>
                             </div>
                         </div>
@@ -240,11 +241,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <div class="ranking-card__main-content">
                         <div class="ranking-card__image-column">
-                            <a href="${
-                              item.affiliateLink || "#"
-                            }" target="_blank" rel="noopener sponsored"><img src="${
-          item.imageUrl || ""
-        }" alt="${item.productName || ""}" /></a>
+                            <a href="${item.affiliateLink || "#"
+          }" target="_blank" rel="noopener sponsored"><img src="${item.imageUrl || ""
+          }" alt="${item.productName || ""}" /></a>
                         </div>
                         <div class="ranking-card__info-column">
                             ${ratingTableHTML}
@@ -252,35 +251,30 @@ document.addEventListener("DOMContentLoaded", function () {
                         </div>
                     </div>
                     
-                    ${
-                      item.productDetail
-                        ? `
+                    ${item.productDetail
+            ? `
                     <div class="product-detail">
                         <div class="product-detail__title-wrapper">商材説明詳細</div>
                         <div class="product-detail__main-content">
                             <div class="product-detail__text-content">
-                                <div class="product-detail__title">${
-                                  item.productDetailTitle || ""
-                                }</div>
+                                <div class="product-detail__title">${item.productDetailTitle || ""
+            }</div>
                                 <p class="product-detail__text">${(
-                                  item.productDetail || ""
-                                ).replace(/\n/g, "<br>")}
+              item.productDetail || ""
+            ).replace(/\n/g, "<br>")}
                                 </p>
                             </div>
                         </div>
                     </div>`
-                        : ""
-                    }
+            : ""
+          }
 
                     <div class="ranking-card__footer">
-                        <p class="ranking-card__cta-microcopy">${
-                          item.ctaMicrocopy || ""
-                        }</p>
-                        <a href="${
-                          item.affiliateLink || "#"
-                        }" class="custom-cta-button ranking-card__cta-button" target="_blank" rel="noopener sponsored">${
-          item.ctaButtonText || item.productName + "で詳しく見てみる"
-        }</a>
+                        <p class="ranking-card__cta-microcopy">${item.ctaMicrocopy || ""
+          }</p>
+                        <a href="${item.affiliateLink || "#"
+          }" class="custom-cta-button ranking-card__cta-button" target="_blank" rel="noopener sponsored">${item.ctaButtonText || item.productName + "で詳しく見てみる"
+          }</a>
                     </div>
                 </div>
             `;
