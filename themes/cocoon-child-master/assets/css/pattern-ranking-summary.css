@@ -55,13 +55,17 @@
 .ranking-badge-summary.rank-2,
 .ranking-badge-summary.rank-3 {
   background-color: transparent !important;
-  width: 80px; /* 画像の幅に合わせて調整 */
+  width: 80px;
+  /* 画像の幅に合わせて調整 */
 }
+
 .ranking-badge-summary.rank-1::after,
 .ranking-badge-summary.rank-2::after,
 .ranking-badge-summary.rank-3::after {
-  display: none; /* 1-3位のリボンを非表示 */
+  display: none;
+  /* 1-3位のリボンを非表示 */
 }
+
 .ranking-badge-summary::after {
   content: "";
   position: absolute;
@@ -72,10 +76,12 @@
   border-style: solid;
   border-width: 23.5px 0 23.5px 20px;
 }
+
 .ranking-badge-summary.rank-4::after,
 .ranking-badge-summary.rank-5::after,
 .ranking-badge-summary.rank-6::after {
-  display: none; /* 4位以降はリボンを非表示 */
+  display: none;
+  /* 4位以降はリボンを非表示 */
 }
 
 .ranking-badge-summary .ranking-badge-image {
@@ -85,29 +91,36 @@
   box-shadow: none;
   border: none;
 }
+
 .ranking-badge-summary .rank-crown {
   display: block;
   font-size: 14px;
   margin-bottom: 2px;
 }
+
 .ranking-badge-summary.rank-1 {
   /* 4位以降のテキスト表示のために残す */
   background-color: #dab332;
 }
+
 .ranking-badge-summary.rank-1::after {
   border-left-color: #dab332;
 }
+
 .ranking-badge-summary.rank-2 {
   /* 4位以降のテキスト表示のために残す */
   background-color: #b8b8b8;
 }
+
 .ranking-badge-summary.rank-2::after {
   border-left-color: #b8b8b8;
 }
+
 .ranking-badge-summary.rank-3 {
   /* 4位以降のテキスト表示のために残す */
   background-color: #c98c56;
 }
+
 .ranking-badge-summary.rank-3::after {
   border-left-color: #c98c56;
 }
@@ -116,26 +129,43 @@
 .ranking-badge-summary.rank-4,
 .ranking-badge-summary.rank-5,
 .ranking-badge-summary.rank-6 {
-  background-color: #385888; /* 少し薄い青に変更 */
-  color: #fff; /* 白抜き */
-  border-radius: 5px; /* 少し丸い角 */
-  padding: 8px 15px; /* 横長長方形になるように調整 */
-  width: auto; /* 横長にするため */
+  background-color: #385888;
+  /* 少し薄い青に変更 */
+  color: #fff;
+  /* 白抜き */
+  border-radius: 5px;
+  /* 少し丸い角 */
+  padding: 8px 15px;
+  /* 横長長方形になるように調整 */
+  width: auto;
+  /* 横長にするため */
 }
 
 .ranking-badge-summary .rank-text {
   font-size: 18px;
   font-weight: bold;
 }
+
 .ranking-item__logo-area {
   flex: 0 0 150px;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0 !important;
 }
+
+.ranking-item__logo-area figure {
+  margin: 0 !important;
+}
+
 .ranking-item__logo-area img {
   max-width: 100%;
   height: auto;
-  margin-bottom: 5px;
+  margin: auto 0;
 }
+
 .ranking-item__logo-area a {
   font-size: 13px;
   text-decoration: underline;
@@ -149,17 +179,20 @@
   padding: 15px;
   border-radius: 8px;
 }
+
 .ranking-item__features ul {
   list-style: none;
   padding-left: 0;
   margin: 0;
 }
+
 .ranking-item__features li {
   font-size: 13px;
   line-height: 1.7;
   position: relative;
   padding-left: 1.2em;
 }
+
 .ranking-item__features li::before {
   content: "●";
   color: #213457;
@@ -168,10 +201,26 @@
   font-size: 0.8em;
   top: 0.2em;
 }
-.ranking-item__features li + li {
+
+.ranking-item__features li+li {
   margin-top: 5px;
 }
 
 .ranking-item__cta {
   flex: 0 0 120px;
+}
+
+/* 商材名と特徴を縦並びにするコンテナ */
+.ranking-item__content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+/* 商材名のフォントサイズを大きく */
+.ranking-item__content-wrapper .has-text-align-center {
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: left !important;
 }

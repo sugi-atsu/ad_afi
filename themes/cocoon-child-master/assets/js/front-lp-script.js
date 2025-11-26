@@ -42,10 +42,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="wp-block-group ranking-item__logo-area">
                         <figure class="wp-block-image"><img src="${item.imageUrl || ""
         }" alt="${item.productName || ""} ロゴ"></figure>
+                    </div>
+                    <div class="ranking-item__content-wrapper">
                         <p class="has-text-align-center"><a href="${item.affiliateLink || "#"
         }">${item.productName || ""}</a></p>
+                        <div class="wp-block-group ranking-item__features">${featuresHTML}</div>
                     </div>
-                    <div class="wp-block-group ranking-item__features">${featuresHTML}</div>
                     <div class="wp-block-group ranking-item__cta">
                         <p><a class="summary-cta-button" href="${item.affiliateLink || "#"
         }">公式<br>サイト</a></p>
