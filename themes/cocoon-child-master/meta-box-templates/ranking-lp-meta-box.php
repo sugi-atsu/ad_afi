@@ -68,6 +68,13 @@ if ($first_char === '{' || $first_char === '[') {
             <button type="button" class="button add-sub-item-btn" data-type="spec">スペック項目を追加</button>
 
             <hr>
+            <h4>比較表用項目 (判定 + テキスト)</h4>
+            <div class="sub-items-wrapper" data-sub-key="comparisonItems">
+                <!-- JSによって比較項目がここに追加されます -->
+            </div>
+            <button type="button" class="button add-sub-item-btn" data-type="comparison">比較項目を追加</button>
+
+            <hr>
             <h4>サマリー用箇条書き</h4>
             <div class="sub-items-wrapper" data-sub-key="summaryPoints">
                 <!-- JSによってサマリー用箇条書きがここに追加されます -->
@@ -112,6 +119,25 @@ if ($first_char === '{' || $first_char === '[') {
     <div class="sub-item">
         <span class="sub-item-handle">↕︎</span>
         <label>箇条書きテキスト: <input type="text" class="sub-item-field" data-key="point"></label>
+        <button type="button" class="button-link-delete remove-sub-item-btn">&times;</button>
+    </div>
+</div>
+
+<!-- JSで「比較項目」を複製するためのテンプレート -->
+<div id="comparison-item-template" style="display:none;">
+    <div class="sub-item">
+        <span class="sub-item-handle">↕︎</span>
+        <label>項目名: <input type="text" class="sub-item-field" data-key="label" placeholder="例: 買取スピード"></label>
+        <label>判定:
+            <select class="sub-item-field" data-key="status">
+                <option value="none">-</option>
+                <option value="double-circle">◎ (とても良い)</option>
+                <option value="circle">◯ (良い)</option>
+                <option value="triangle">△ (普通)</option>
+                <option value="cross">× (悪い)</option>
+            </select>
+        </label>
+        <label>補足: <input type="text" class="sub-item-field" data-key="text" placeholder="例: 即日現金"></label>
         <button type="button" class="button-link-delete remove-sub-item-btn">&times;</button>
     </div>
 </div>

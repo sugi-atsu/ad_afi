@@ -1,50 +1,280 @@
 /* ===================================
-   比較表デザイン
+   比較カードパターン (JS描画用)
    =================================== */
-#dynamic-comparison-table-app .wp-block-table {
-  border: 1px solid #dddddd;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 1px 1px 2px rgba(0%, 0%, 0%, 0.1);
+
+.comparison-section {
+  position: relative;
+  padding-bottom: 30px;
 }
 
-#dynamic-comparison-table-app table {
+.comparison-table-wrapper {
+  /* 横スクロール対応のコンテナ */
+  overflow-x: auto;
   width: 100%;
-  border-collapse: collapse;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  /* スクロールバーのスペース */
+  -webkit-overflow-scrolling: touch;
 }
 
-#dynamic-comparison-table-app th {
-  padding: 12px 10px;
-  font-weight: bold;
-  text-align: center;
-  font-size: 14px;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-}
-
-#dynamic-comparison-table-app td {
+/* フレックスボックスコンテナ */
+.comparison-container {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   background-color: #fff;
-  padding: 12px 10px;
-  text-align: center;
-  border-right: 1px solid #dddddd;
-  border-bottom: 1px solid #dddddd;
-  font-size: 13px;
-  line-height: 1.6;
+  width: max-content;
+  /* 中身に合わせて幅を広げる */
+  min-width: 100%;
 }
 
-#dynamic-comparison-table-app td:first-child {
+/* ===================================
+   左端：インデックスカラム
+   =================================== */
+.comparison-index-column {
+  flex: 0 0 160px;
+  /* 固定幅 */
+  width: 160px;
+  background-color: #3366cc;
+  /* 濃い青 */
+  color: #fff;
   font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  order: -10;
+  /* 確実に一番左にする */
 }
 
-#dynamic-comparison-table-app tr:last-child th,
-#dynamic-comparison-table-app tr:last-child td {
+.comparison-index-cell {
+  padding: 10px;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* 最初のセル（ヘッダー） */
+.comparison-index-cell.header-cell {
+  background-color: #213457;
+  height: 180px;
+  /* 商材ヘッダーの高さに合わせる */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* ===================================
+   商材カラム
+   =================================== */
+.comparison-product-column {
+  flex: 0 0 200px;
+  /* 商材ごとの幅 */
+  width: 200px;
+  border-right: 1px solid #eee;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* 最後の商材カラムのボーダーを削除 */
+.comparison-product-column:last-child {
+  border-right: none;
+}
+
+/* ===================================
+   おすすめカラム（1位）の強調
+   =================================== */
+.comparison-product-column.is-recommended {
+  background-color: #fffde7;
+  /* 薄い黄色 */
+  border: 2px solid #ffd700;
+  /* ゴールドの枠線 */
+  /* order: -1; 削除 */
+  position: relative;
+  z-index: 5;
+}
+
+/* おすすめカラム内のヘッダー等の背景も透過または合わせる */
+.comparison-product-column.is-recommended .comparison-product-header,
+.comparison-product-column.is-recommended .comparison-cell {
+  background-color: transparent;
+  /* 親の黄色が見えるように */
+  border-bottom-color: rgba(0, 0, 0, 0.1);
+  /* ボーダー色調整 */
+}
+
+/* 総合評価セルの背景色上書き */
+.comparison-product-column.is-recommended .comparison-rating-cell {
+  background-color: rgba(255, 255, 255, 0.5);
+  /* 少し白を混ぜて読みやすく */
+}
+
+/* 共通セルスタイル */
+.comparison-cell {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  height: 120px;
+  /* セルの高さを固定して揃える */
+  box-sizing: border-box;
+}
+
+.comparison-index-cell {
+  height: 120px;
+  /* セルの高さを合わせる */
+}
+
+/* ===================================
+   セルの詳細スタイル
+   =================================== */
+
+/* 商材ヘッダー(画像・名前) */
+.comparison-product-header {
+  height: 180px;
+  /* 固定高さ */
+  padding: 15px 10px;
+  border-bottom: 2px solid #3366cc;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.comparison-product-logo {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comparison-product-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.comparison-product-name {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.comparison-product-name a {
+  color: #3366cc;
+  text-decoration: underline;
+}
+
+/* 総合評価 */
+.comparison-rating-cell {
+  background-color: #f0f8ff;
+  /* 薄い青背景 */
+}
+
+.rating-score-large {
+  font-size: 24px;
+  font-weight: bold;
+  color: #213457;
+  line-height: 1;
+}
+
+.rating-stars {
+  color: #f4b400;
+  font-size: 16px;
+  margin-top: 5px;
+}
+
+/* 判定アイコン */
+.comparison-status-icon {
+  font-size: 40px;
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+.status-double-circle {
+  color: #d32f2f;
+  /* 赤 */
+}
+
+.status-double-circle::before {
+  content: "◎";
+}
+
+.status-circle {
+  color: #f57c00;
+  /* オレンジ */
+}
+
+.status-circle::before {
+  content: "◯";
+}
+
+.status-triangle {
+  color: #388e3c;
+  /* 緑 */
+}
+
+.status-triangle::before {
+  content: "△";
+}
+
+.status-cross {
+  color: #757575;
+  /* グレー */
+}
+
+.status-cross::before {
+  content: "×";
+}
+
+.status-none {
+  color: #ccc;
+}
+
+.status-none::before {
+  content: "-";
+}
+
+/* 補足テキスト */
+.comparison-status-text {
+  font-size: 12px;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* CTAエリア */
+.comparison-cta-cell {
+  height: auto;
+  padding: 20px 10px;
   border-bottom: none;
 }
 
-#dynamic-comparison-table-app figcaption {
-  text-align: center;
-  font-size: 12px;
-  color: gray;
-  padding: 8px 0;
-  margin-top: 5px;
+.comparison-cta-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  background-color: #d32f2f;
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.3s;
+}
+
+.comparison-cta-btn:hover {
+  opacity: 0.8;
+  color: #fff;
 }

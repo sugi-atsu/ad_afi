@@ -3,6 +3,8 @@
 if (!defined('ABSPATH'))
     exit;
 
+// パターン用CSS: 比較カード (下部のenqueue_lp_front_scriptsで読み込まれています)
+
 /**
  * Cocoon既定のJS・CSSの読み込みを必要に応じてOFFにする
  */
@@ -352,3 +354,126 @@ function remove_header_and_sidebar_from_html($buffer)
     $buffer = str_replace('main-wrap', 'main-wrap main-full', $buffer);
     return $buffer;
 }
+
+/****************************************
+ * メディアライブラリ拡張 (リンクコピー機能)
+ ****************************************/
+
+/**
+ * メディアライブラリ（リスト表示）にURLコピー用カラムを追加
+ */
+function add_media_url_column($columns) {
+    // 'date'列の前に挿入するために配列を再構築
+    $new_columns = array();
+    foreach ($columns as $key => $value) {
+        if ($key === 'date') {
+            $new_columns['media_url'] = 'リンク'; // カラム名
+        }
+        $new_columns[$key] = $value;
+    }
+    return $new_columns;
+}
+add_filter('manage_media_columns', 'add_media_url_column');
+
+/**
+ * カスタムカラムの中身（入力欄とコピーボタン）を出力
+ */
+function display_media_url_column($column_name, $post_id) {
+    if ($column_name !== 'media_url') {
+        return;
+    }
+
+    $url = wp_get_attachment_url($post_id);
+    
+    if ($url) {
+        // レイアウト崩れを防ぐため、readonlyのinputとボタンで構成
+        echo '<div class="media-url-column-wrapper" style="display:flex; gap:5px; align-items:center;">';
+        echo '<input type="text" value="' . esc_url($url) . '" readonly class="media-url-input" style="width:100%; min-width:120px; background:#f0f0f1; cursor:pointer;" onclick="this.select();">';
+        echo '<button type="button" class="button media-url-copy-btn" data-url="' . esc_url($url) . '"><span class="dashicons dashicons-admin-page" style="line-height:1.3;"></span></button>';
+        echo '</div>';
+    }
+}
+add_action('manage_media_custom_column', 'display_media_url_column', 10, 2);
+
+/**
+ * 管理画面用スクリプトとスタイル（コピー機能の実装と列幅調整）
+ */
+function add_media_url_column_assets() {
+    $screen = get_current_screen();
+    // メディアライブラリのリスト表示のみに適用
+    if ($screen->id !== 'upload') {
+        return;
+    }
+    ?>
+    <style>
+        /* URLカラムの幅を制限してレイアウト崩壊を防ぐ */
+        .fixed .column-media_url {
+            width: 20%; 
+            min-width: 180px;
+        }
+        /* コピー成功時のスタイル */
+        .media-url-copy-btn.copied {
+            border-color: #00a32a;
+            color: #00a32a;
+        }
+        /* モバイル対応 */
+        @media screen and (max-width: 782px) {
+            .fixed .column-media_url {
+                width: auto;
+                display: block;
+            }
+            .column-media_url .media-url-column-wrapper {
+                margin-top: 5px;
+            }
+        }
+    </style>
+    <script>
+    jQuery(document).ready(function($) {
+        $('.media-url-copy-btn').on('click', function(e) {
+            e.preventDefault();
+            var btn = $(this);
+            var url = btn.data('url');
+            
+            // クリップボードAPIを使用
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(function() {
+                    showCopiedEffect(btn);
+                }).catch(function(err) {
+                    // 失敗時は従来のexecCommandでフォールバック（念のため）
+                    fallbackCopyTextToClipboard(url, btn);
+                });
+            } else {
+                fallbackCopyTextToClipboard(url, btn);
+            }
+        });
+
+        function fallbackCopyTextToClipboard(text, btn) {
+            var textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";  // スクロール防止
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                var successful = document.execCommand('copy');
+                if(successful) showCopiedEffect(btn);
+            } catch (err) {
+                console.error('Copy failed', err);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showCopiedEffect(btn) {
+            var originalIcon = '<span class="dashicons dashicons-admin-page" style="line-height:1.3;"></span>';
+            
+            btn.addClass('copied').html('<span class="dashicons dashicons-yes" style="line-height:1.3;"></span>');
+            
+            setTimeout(function() {
+                btn.removeClass('copied').html(originalIcon);
+            }, 2000);
+        }
+    });
+    </script>
+    <?php
+}
+add_action('admin_footer', 'add_media_url_column_assets');

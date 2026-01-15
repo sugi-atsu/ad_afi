@@ -10,6 +10,7 @@
     const ratingTemplateHtml = $("#rating-item-template").html();
     const specTemplateHtml = $("#spec-item-template").html();
     const summaryTemplateHtml = $("#summary-point-template").html();
+    const comparisonTemplateHtml = $("#comparison-item-template").html();
 
     // =====================================================================
     // データ更新関数 (JSON生成)
@@ -113,6 +114,7 @@
                 if (subKey === "ratingItems") template = ratingTemplateHtml;
                 if (subKey === "specItems") template = specTemplateHtml;
                 if (subKey === "summaryPoints") template = summaryTemplateHtml;
+                if (subKey === "comparisonItems") template = comparisonTemplateHtml;
 
                 const $newSubItem = $(template);
                 $newSubItem.find(".sub-item-field").each(function () {
@@ -171,6 +173,7 @@
       if (type === "rating") template = ratingTemplateHtml;
       if (type === "spec") template = specTemplateHtml;
       if (type === "summary") template = summaryTemplateHtml;
+      if (type === "comparison") template = comparisonTemplateHtml;
 
       if (template) {
         $subWrapper.append(template);

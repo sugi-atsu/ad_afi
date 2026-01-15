@@ -138,6 +138,131 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // ===================================
+  // 機能3：動的比較カード（横スクロール比較表）
+  // ===================================
+  const comparisonCardsContainer = document.getElementById(
+    "dynamic-comparison-cards-app"
+  );
+  if (comparisonCardsContainer) {
+    if (items.length === 0) {
+      comparisonCardsContainer.innerHTML = "<p>比較する商品がありません。</p>";
+    } else {
+      // 共通関数: 星評価レンダリング
+      const renderStars = (rating) => {
+        let stars = "";
+        const numRating = parseFloat(rating);
+        if (isNaN(numRating)) return "評価なし";
+        for (let i = 1; i <= 5; i++) {
+          stars += i <= numRating ? "★" : "☆";
+        }
+        return stars;
+      };
+
+      // 共通関数: 判定アイコンクラス取得
+      const getStatusClass = (status) => {
+        switch (status) {
+          case 'double-circle': return 'status-double-circle';
+          case 'circle': return 'status-circle';
+          case 'triangle': return 'status-triangle';
+          case 'cross': return 'status-cross';
+          default: return 'status-none';
+        }
+      };
+
+      // 1. 全商材からユニークな比較項目キーを取得
+      const allLabels = new Set();
+      items.forEach((item) => {
+        if (Array.isArray(item.comparisonItems)) {
+          item.comparisonItems.forEach((c) => allLabels.add(c.label));
+        }
+      });
+      const comparisonLabels = Array.from(allLabels);
+
+      // HTML構築開始
+      let html = '<div class="comparison-container">';
+
+      // 2. 左端インデックスカラムの生成
+      html += '<div class="comparison-index-column">';
+      // ヘッダーセル（空またはタイトル）
+      html += '<div class="comparison-index-cell header-cell">おすすめ<br>ランキング</div>';
+      // 総合評価ラベル
+      html += '<div class="comparison-index-cell comparison-rating-cell">総合評価</div>';
+      // 各比較項目のラベル
+      comparisonLabels.forEach(label => {
+        html += `<div class="comparison-index-cell">${label}</div>`;
+      });
+      // CTA行のラベル（空でも可）
+      html += '<div class="comparison-index-cell comparison-cta-cell">公式サイト</div>';
+      html += '</div>'; // end index-column
+
+      // 3. 各商材カラムの生成
+      items.forEach((item, index) => {
+        // 1番目のアイテムにおすすめクラスを付与
+        const recommendedClass = index === 0 ? 'is-recommended' : '';
+        html += `<div class="comparison-product-column ${recommendedClass}">`;
+
+        // おすすめバッジ（オプション）
+        // if (index === 0) {
+        //   html += '<div class="recommend-badge">No.1</div>';
+        // }
+
+        // ヘッダー（画像・リンク）
+        html += `
+          <div class="comparison-product-header">
+            <div class="comparison-product-logo">
+              <a href="${item.affiliateLink || '#'}" target="_blank" rel="noopener sponsored">
+                <img src="${item.imageUrl || ''}" alt="${item.productName || ''}">
+              </a>
+            </div>
+            <div class="comparison-product-name">
+              <a href="${item.affiliateLink || '#'}" target="_blank" rel="noopener sponsored">${item.productName || ''}</a>
+            </div>
+          </div>
+        `;
+
+        // 総合評価セル
+        const numRating = parseFloat(item.overallRating) || 0;
+        html += `
+          <div class="comparison-cell comparison-rating-cell">
+            <span class="rating-score-large">${numRating.toFixed(1)}</span>
+            <span class="rating-stars">${renderStars(numRating)}</span>
+          </div>
+        `;
+
+        // 各比較項目セル
+        comparisonLabels.forEach(label => {
+          // 商材データから該当する項目を探す
+          const targetItem = Array.isArray(item.comparisonItems)
+            ? item.comparisonItems.find(c => c.label === label)
+            : null;
+
+          const status = targetItem ? targetItem.status : 'none';
+          const text = targetItem ? (targetItem.text || '') : '-';
+
+          html += `
+            <div class="comparison-cell">
+              <span class="comparison-status-icon ${getStatusClass(status)}"></span>
+              <span class="comparison-status-text">${text}</span>
+            </div>
+          `;
+        });
+
+        // CTAセル
+        html += `
+          <div class="comparison-cell comparison-cta-cell">
+             <a href="${item.affiliateLink || '#'}" class="comparison-cta-btn" target="_blank" rel="noopener sponsored">公式サイト</a>
+          </div>
+        `;
+
+        html += '</div>'; // end product-column
+      });
+
+      html += '</div>'; // end comparison-container
+      comparisonCardsContainer.innerHTML = html;
+    }
+  }
+
+  // ===================================
   // 機能2：動的ランキング（詳細）【ここからが改修箇所】
   // ===================================
   const rankingContainer = document.getElementById("dynamic-ranking-app");
