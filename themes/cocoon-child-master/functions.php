@@ -26,11 +26,57 @@ function initialize_lp_system()
     register_block_type(__DIR__ . '/blocks/cta-button');
     register_block_type(__DIR__ . '/blocks/dynamic-ranking');
 
-    // ブロックパターンカテゴリの登録
-    register_block_pattern_category('lp-parts', array('label' => 'LP専用パーツ'));
+    // ブロックパターンカテゴリの登録（★を付けて上部に表示されやすくする）
+    register_block_pattern_category('lp-parts', array('label' => '★LP専用パーツ'));
 
 }
-add_action('init', 'initialize_lp_system');
+add_action('init', 'initialize_lp_system', 5);
+
+/**
+ * ブロックパターンのカテゴリ順序を調整して
+ * 「★LP専用パーツ」を最上部に表示させる
+ */
+function move_lp_patterns_category_to_top($settings) {
+    if (isset($settings['block_pattern_categories'])) {
+        $categories = $settings['block_pattern_categories'];
+        $lp_cat_index = -1;
+        
+        foreach ($categories as $index => $cat) {
+            if ($cat['name'] === 'lp-parts') {
+                $lp_cat_index = $index;
+                break;
+            }
+        }
+        
+        if ($lp_cat_index !== -1) {
+            $lp_cat = $categories[$lp_cat_index];
+            unset($categories[$lp_cat_index]);
+            array_unshift($categories, $lp_cat);
+            $settings['block_pattern_categories'] = array_values($categories);
+        }
+    }
+    return $settings;
+}
+add_filter('block_editor_settings_all', 'move_lp_patterns_category_to_top');
+
+/****************************************
+ * LPパーツ呼び出し用ショートコード
+ ****************************************/
+function register_lp_pattern_shortcodes() {
+    // [ranking_summary]
+    add_shortcode('ranking_summary', function() {
+        return do_blocks('<!-- wp:pattern {"slug":"lp-patterns/ranking-summary"} /-->');
+    });
+    // [ranking_detailed]
+    add_shortcode('ranking_detailed', function() {
+        return do_blocks('<!-- wp:pattern {"slug":"lp-patterns/ranking-detailed"} /-->');
+    });
+    // [comparison_table]
+    add_shortcode('comparison_table', function() {
+        return do_blocks('<!-- wp:pattern {"slug":"lp-patterns/comparison-table"} /-->');
+    });
+}
+add_action('init', 'register_lp_pattern_shortcodes');
 
 
 /****************************************
