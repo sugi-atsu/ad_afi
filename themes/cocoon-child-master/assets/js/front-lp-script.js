@@ -169,14 +169,26 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       };
 
-      // 1. 全商材からユニークな比較項目キーを取得
-      const allLabels = new Set();
+      // 1. 全商材からユニークな比較項目キーを取得（スペック、比較、評価の順）
+      const specLabelSet = new Set();
+      const compLabelSet = new Set();
+      const ratingLabelSet = new Set();
+
       items.forEach((item) => {
-        if (Array.isArray(item.comparisonItems)) {
-          item.comparisonItems.forEach((c) => allLabels.add(c.label));
-        }
+        if (Array.isArray(item.specItems)) item.specItems.forEach((s) => specLabelSet.add(s.label));
+        if (Array.isArray(item.comparisonItems)) item.comparisonItems.forEach((c) => compLabelSet.add(c.label));
+        if (Array.isArray(item.ratingItems)) item.ratingItems.forEach((r) => ratingLabelSet.add(r.label));
       });
-      const comparisonLabels = Array.from(allLabels);
+
+      // 表示用の全ラベルリスト
+      // 表示用の全ラベルリスト（重複排除、"項目名"を除外）
+      const mergedLabels = [
+        ...Array.from(specLabelSet),
+        ...Array.from(compLabelSet),
+        ...Array.from(ratingLabelSet)
+      ];
+      const comparisonLabels = Array.from(new Set(mergedLabels))
+        .filter(label => label !== '項目名');
 
       // HTML構築開始
       let html = '<div class="comparison-container">';
@@ -200,11 +212,6 @@ document.addEventListener("DOMContentLoaded", function () {
         // 1番目のアイテムにおすすめクラスを付与
         const recommendedClass = index === 0 ? 'is-recommended' : '';
         html += `<div class="comparison-product-column ${recommendedClass}">`;
-
-        // おすすめバッジ（オプション）
-        // if (index === 0) {
-        //   html += '<div class="recommend-badge">No.1</div>';
-        // }
 
         // ヘッダー（画像・リンク）
         html += `
@@ -231,20 +238,54 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // 各比較項目セル
         comparisonLabels.forEach(label => {
-          // 商材データから該当する項目を探す
-          const targetItem = Array.isArray(item.comparisonItems)
-            ? item.comparisonItems.find(c => c.label === label)
-            : null;
+          let status = 'none';
+          let text = '-';
+          let isRatingValue = false;
+          let ratingValue = 0;
 
-          const status = targetItem ? targetItem.status : 'none';
-          const text = targetItem ? (targetItem.text || '') : '-';
+          // 優先順位: Comparison -> Spec -> Rating
+          // ComparisonItemsから検索
+          let compItem = Array.isArray(item.comparisonItems) ? item.comparisonItems.find(c => c.label === label) : null;
+          if (compItem) {
+            status = compItem.status;
+            text = compItem.text || '';
+          } else {
+            // SpecItemsから検索
+            let specItem = Array.isArray(item.specItems) ? item.specItems.find(s => s.label === label) : null;
+            if (specItem) {
+              text = specItem.value || '';
+              // statusはnoneのまま
+            } else {
+              // RatingItemsから検索
+              let ratingItem = Array.isArray(item.ratingItems) ? item.ratingItems.find(r => r.label === label) : null;
+              if (ratingItem) {
+                isRatingValue = true;
+                ratingValue = parseFloat(ratingItem.value) || 0;
+                text = ''; // テキストではなく星を表示する
+              }
+            }
+          }
 
-          html += `
-            <div class="comparison-cell">
-              <span class="comparison-status-icon ${getStatusClass(status)}"></span>
-              <span class="comparison-status-text">${text}</span>
-            </div>
-          `;
+          if (isRatingValue) {
+            // 評価項目の場合
+            html += `
+                <div class="comparison-cell">
+                  <span class="rating-stars" style="font-size:14px">${renderStars(ratingValue)}</span>
+                  <span style="font-size:12px">(${ratingValue.toFixed(1)})</span>
+                </div>
+              `;
+          } else {
+            // 通常項目（比較 or スペック）
+            // statusがnoneでない場合はアイコンを表示
+            let iconHtml = status !== 'none' ? `<span class="comparison-status-icon ${getStatusClass(status)}"></span>` : '';
+
+            html += `
+                <div class="comparison-cell">
+                  ${iconHtml}
+                  <span class="comparison-status-text">${text}</span>
+                </div>
+              `;
+          }
         });
 
         // CTAセル
@@ -381,7 +422,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${item.productDetail
             ? `
                     <div class="product-detail">
-                        <div class="product-detail__title-wrapper">商材説明詳細</div>
+                        <div class="product-detail__title-wrapper">ここがポイント！</div>
                         <div class="product-detail__main-content">
                             <div class="product-detail__text-content">
                                 <div class="product-detail__title">${item.productDetailTitle || ""

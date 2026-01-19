@@ -17,16 +17,13 @@ if (!defined('ABSPATH'))
     content="<?php echo apply_filters('cocoon_meta_referrer_content', get_meta_referrer_content()); ?>">
   <meta name="format-detection" content="telephone=no">
 
-  <!-- Google Tag Manager -->
-  <script>(function (w, d, s, l, i) {
-      w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-          new Date().getTime(), event: 'gtm.js'
-      }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-    })(window, document, 'script', 'dataLayer', 'GTM-54D4C333');</script>
-  <!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-MKMKJ49Z');</script>
+<!-- End Google Tag Manager -->
 
   <?php //ヘッドタグ内挿入用のアクセス解析用テンプレート
   cocoon_template_part('tmp/head-analytics'); ?>
@@ -77,9 +74,9 @@ if (!defined('ABSPATH'))
 
 <body <?php body_class(); ?> itemscope itemtype="https://schema.org/WebPage">
   <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-54D4C333" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKMKJ49Z"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
   <?php //body最初に挿入するアクセス解析ヘッダータグの取得
   cocoon_template_part('tmp/body-top-analytics'); ?>

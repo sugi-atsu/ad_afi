@@ -169,13 +169,15 @@
 .table-item__header,
 .table-item__data {
   padding: 10px;
-  align-self: center;
+  display: flex;
+  align-items: center;
   font-size: 14px;
 }
 
 .table-item__header {
   font-weight: bold;
   text-align: center;
+  justify-content: center;
   color: #fff;
   border-right: 1px solid #ddd;
 }
@@ -262,6 +264,7 @@
 /* テキストコンテンツエリア */
 .product-detail__text-content {
   /* flexアイテムではなくなったため、flex: 1; は不要 */
+  display: block;
 }
 
 /* テキスト内の小見出し */
@@ -381,45 +384,137 @@
   border: none;
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
+/* ===================================
+   レスポンシブ対応 (2025年基準)
+   =================================== */
+
+/* タブレット (横向き) / 小さめのノートPC (1024px以下) */
+@media screen and (max-width: 1024px) {
+  .ranking-card__main-content {
+    gap: 15px;
+    /* PCより少し間隔を詰める */
+  }
+
+  /* テーブルの列幅を調整 */
+  .ranking-card__table-grid {
+    column-gap: 10px;
+  }
+}
+
+/* タブレット (縦向き) / 大きめのスマホ (768px以下) */
+@media screen and (max-width: 768px) {
   .ranking-card__main-content {
     flex-direction: column;
+    /* 縦積みに変更 */
   }
 
   .ranking-card__image-column {
     flex-basis: auto;
-    max-width: 200px;
-    margin: 0 auto;
+    max-width: 250px;
+    /* 画像サイズを少し大きめに確保 */
+    width: 60%;
+    /* 画面幅に応じた相対サイズ */
+    margin: 0 auto 20px auto;
+    /* 中央寄せと下部マージン */
   }
 
   .ranking-card__table-grid {
     grid-template-columns: 1fr;
+    /* 1カラムに変更 */
+  }
+
+  /* テーブル内の項目（行）の比率調整 */
+  .ranking-card__table-item {
+    grid-template-columns: 100px 1fr;
+    /* 左カラムを少し狭める */
+  }
+
+  .table-item__header,
+  .table-item__data {
+    padding: 8px;
+    /* パディング少し減らす */
+    font-size: 13px;
+    /* 文字サイズ微調整 */
   }
 
   .ranking-card__table-grid .ranking-card__table-item:last-child {
     border-bottom: none;
   }
 
+  /* ヘッダー情報の調整 */
+  .ranking-card__header-flex {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    /* バッジとタイトルの間隔 */
+  }
+
+  .ranking-card__product-name {
+    margin-top: 5px;
+    /* バッジとの距離 */
+  }
+
+  .ranking-card__header-sub {
+    margin-top: 10px;
+    align-self: flex-start;
+    /* 左寄せに変更（好みによるが揃えた方が自然） */
+    width: 100%;
+  }
+
+  .ranking-card__total-score {
+    justify-content: flex-start;
+    /* 左寄せ */
+  }
+}
+
+/* スマートフォン (480px以下) */
+@media screen and (max-width: 480px) {
+  .ranking-card__image-column {
+    width: 80%;
+    /* スマホでは画像をより大きく目立たせる */
+    max-width: none;
+  }
+
+  .ranking-card__product-name {
+    font-size: 20px;
+    /* タイトル文字サイズを調整 */
+  }
+
+  .ranking-card__catchphrase {
+    font-size: 18px;
+  }
+
   .product-detail__main-content {
-    /* display: flexがなくなったため不要 */
+    padding: 15px;
+    /* 余白を削減して画面を有効活用 */
+  }
+
+  /* バッジサイズの調整 */
+  .ranking-badge {
+    width: 50px;
+    height: 50px;
+    font-size: 14px;
+    padding: 5px;
+  }
+
+  .ranking-badge.rank-1,
+  .ranking-badge.rank-2,
+  .ranking-badge.rank-3 {
+    width: 60px;
+  }
+
+  .ranking-card__cta-button {
+    font-size: 18px !important;
+    padding: 15px !important;
+    width: 100%;
+    /* ボタンを全幅に */
+    box-sizing: border-box;
   }
 
   .product-detail::before,
   .product-detail::after {
     left: 50%;
     transform: translateX(-50%);
-  }
-
-  .ranking-badge {
-    width: 65px;
-    height: 65px;
-    border: 3px solid #fff;
-  }
-
-  .ranking-badge.rank-6 {
-    padding: 6px 12px;
-    /* モバイルでのパディング調整 */
   }
 }
 
