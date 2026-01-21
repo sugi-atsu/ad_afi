@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <div class="wp-block-group ranking-item__features">${featuresHTML}</div>
                     </div>
                     <div class="wp-block-group ranking-item__cta">
-                        <p><a class="summary-cta-button" href="${item.affiliateLink || "#"
+                        <p><a class="summary-cta-button lp-track-cta" href="${item.affiliateLink || "#"
         }">公式<br>サイト</a></p>
                     </div>
                 </div>
@@ -291,7 +291,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // CTAセル
         html += `
           <div class="comparison-cell comparison-cta-cell">
-             <a href="${item.affiliateLink || '#'}" class="comparison-cta-btn" target="_blank" rel="noopener sponsored">公式サイト</a>
+             <a href="${item.affiliateLink || '#'}" class="comparison-cta-btn lp-track-cta" target="_blank" rel="noopener sponsored">公式サイト</a>
           </div>
         `;
 
@@ -441,7 +441,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p class="ranking-card__cta-microcopy">${item.ctaMicrocopy || ""
           }</p>
                         <a href="${item.affiliateLink || "#"
-          }" class="custom-cta-button ranking-card__cta-button" target="_blank" rel="noopener sponsored">${item.ctaButtonText || item.productName + "で詳しく見てみる"
+          }" class="custom-cta-button ranking-card__cta-button lp-track-cta" target="_blank" rel="noopener sponsored">${item.ctaButtonText || item.productName + "で詳しく見てみる"
           }</a>
                     </div>
                 </div>

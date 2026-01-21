@@ -53,7 +53,7 @@ if ( strpos($url, home_url()) === false ) {
 <div <?php echo $wrapper_attributes; ?>>
     <a 
         href="<?php echo esc_url( $url ); ?>" 
-        class="custom-cta-button" 
+        class="custom-cta-button lp-track-cta" 
         style="<?php echo $styles; ?>"
         <?php if ( $opens_in_new_tab ) : ?>
             target="_blank" rel="<?php echo esc_attr( $rel ); ?>"
