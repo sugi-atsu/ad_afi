@@ -425,14 +425,14 @@
 
   /* テーブル内の項目（行）の比率調整 */
   .ranking-card__table-item {
-    grid-template-columns: 100px 1fr;
-    /* 左カラムを少し狭める */
+    grid-template-columns: 8.5em 1fr;
+    /* バッジなどの左カラム幅を確保 (100px -> 8.5em 約120px) */
   }
 
   .table-item__header,
   .table-item__data {
-    padding: 8px;
-    /* パディング少し減らす */
+    padding: 8px 6px;
+    /* パディングを微調整してスペース確保 */
     font-size: 13px;
     /* 文字サイズ微調整 */
   }

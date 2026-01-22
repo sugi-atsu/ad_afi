@@ -306,6 +306,8 @@
   .comparison-index-column {
     flex: 0 0 100px;
     width: 100px;
+    min-width: 100px;
+    /* ★追加: 最小幅を確保して見切れを防ぐ */
   }
 
   /* 商材カラムの幅を調整 */

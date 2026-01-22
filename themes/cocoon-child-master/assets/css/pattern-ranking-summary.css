@@ -224,3 +224,81 @@
   font-weight: bold;
   text-align: left !important;
 }
+
+/* ===================================
+   レスポンシブ対応
+   =================================== */
+@media screen and (max-width: 768px) {
+  .lp-summary-ranking__item {
+    flex-wrap: wrap;
+    position: relative;
+    padding: 15px;
+    padding-top: 45px;
+    /* バッジ用のスペース */
+  }
+
+  /* バッジを左上に絶対配置 */
+  .ranking-badge-summary {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 5;
+    margin: 0;
+  }
+
+  /* ロゴエリア：中央寄せ */
+  .ranking-item__logo-area {
+    flex: 0 0 100%;
+    margin: 0 0 15px 0 !important;
+    text-align: center;
+  }
+
+  .ranking-item__logo-area img {
+    max-width: 200px;
+    /* 大きすぎないように制限 */
+    width: 80%;
+  }
+
+  /* コンテンツ：全幅 */
+  .ranking-item__content-wrapper {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0;
+  }
+
+  .ranking-item__content-wrapper .has-text-align-center {
+    font-size: 1.1em;
+    text-align: center !important;
+    /* スマホではタイトル中央寄せ */
+    margin-bottom: 10px;
+  }
+
+  /* CTAボタン：全幅 */
+  .ranking-item__cta {
+    flex: 0 0 100%;
+    width: 100%;
+    margin-top: 15px;
+  }
+
+  .ranking-item__cta p {
+    margin: 0;
+  }
+
+  .summary-cta-button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 5px;
+    background-color: #f5a623;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 1.2;
+  }
+
+  /* サマリーランキングのボタンのデフォルトスタイルがあればそれを維持しつつ調整 */
+}

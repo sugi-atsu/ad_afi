@@ -102,6 +102,7 @@ function show_ranking_lp_meta_box_html($post)
     wp_nonce_field('save_ranking_data_action', 'ranking_data_nonce');
     $json_data = get_post_meta($post->ID, '_cl_ranking_lp_data', true);
     $section_title = get_post_meta($post->ID, '_cl_ranking_lp_section_title', true); // タイトル取得
+    $comparison_title = get_post_meta($post->ID, '_cl_ranking_lp_comparison_title', true); // 比較表タイトル取得
     $template_path = get_stylesheet_directory() . '/meta-box-templates/ranking-lp-meta-box.php';
     if (file_exists($template_path)) {
         require($template_path);
@@ -173,6 +174,10 @@ function save_ranking_lp_meta_box_data($post_id, $post)
     // セクションタイトルの保存
     if (isset($_POST['ranking_lp_section_title'])) {
         update_post_meta($post_id, '_cl_ranking_lp_section_title', sanitize_text_field($_POST['ranking_lp_section_title']));
+    }
+    // 比較表セクションタイトルの保存
+    if (isset($_POST['ranking_lp_comparison_title'])) {
+        update_post_meta($post_id, '_cl_ranking_lp_comparison_title', sanitize_text_field($_POST['ranking_lp_comparison_title']));
     }
 }
 add_action('save_post_page', 'save_ranking_lp_meta_box_data', 10, 2);
@@ -308,10 +313,12 @@ function enqueue_lp_front_scripts()
         }
 
         $section_title = get_post_meta($post->ID, '_cl_ranking_lp_section_title', true);
+        $comparison_title = get_post_meta($post->ID, '_cl_ranking_lp_comparison_title', true);
         
         wp_localize_script('lp-front-script', 'rankingLpData', array(
             'items' => is_array($items_data) ? $items_data : [],
-            'sectionTitle' => $section_title
+            'sectionTitle' => $section_title,
+            'comparisonTitle' => $comparison_title
         ));
     }
 

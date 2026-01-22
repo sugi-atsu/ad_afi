@@ -61,6 +61,16 @@ document.addEventListener("DOMContentLoaded", function () {
     summaryContainer.innerHTML = "<p>表示するランキングがありません。</p>";
   }
 
+  /* タイトルの書き換え処理（比較表） */
+  const comparisonTitleElement = document.querySelector(".lp-comparison-title");
+  if (
+    comparisonTitleElement &&
+    window.rankingLpData?.comparisonTitle &&
+    window.rankingLpData.comparisonTitle.trim() !== ""
+  ) {
+    comparisonTitleElement.textContent = window.rankingLpData.comparisonTitle;
+  }
+
   // ===================================
   // 機能1：動的比較表【変更なし】
   // ===================================
