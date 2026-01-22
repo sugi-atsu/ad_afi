@@ -310,6 +310,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
       html += '</div>'; // end comparison-container
       comparisonCardsContainer.innerHTML = html;
+
+      // スクロールヒントの追加 (スマホ用)
+      const hintHtml = `
+        <div class="scroll-hint-overlay">
+            <div class="scroll-hint-content">
+                <span>横へスクロール</span>
+                <div class="scroll-hint-icon"></div>
+            </div>
+        </div>
+      `;
+
+      // 既存のヒントがあれば削除（再描画時などの重複防止）
+      const existingHint = comparisonCardsContainer.parentNode.querySelector('.scroll-hint-overlay');
+      if (existingHint) existingHint.remove();
+
+      // コンテナの後ろ（セクション内）に追加
+      comparisonCardsContainer.insertAdjacentHTML('afterend', hintHtml);
+
+      // スクロールまたはタッチでヒントを消す
+      const hintEl = comparisonCardsContainer.parentNode.querySelector('.scroll-hint-overlay');
+      if (hintEl) {
+        const removeHint = () => {
+          hintEl.style.opacity = '0';
+          setTimeout(() => {
+            if (hintEl.parentNode) hintEl.parentNode.removeChild(hintEl);
+          }, 500);
+        };
+
+        comparisonCardsContainer.addEventListener('scroll', removeHint, { once: true });
+        comparisonCardsContainer.addEventListener('touchstart', removeHint, { once: true });
+      }
     }
   }
 

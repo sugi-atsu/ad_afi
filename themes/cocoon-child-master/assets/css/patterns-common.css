@@ -80,3 +80,12 @@ body.lp-template {
   box-shadow: 1px 1px 2px rgba(0%, 0%, 0%, 0.2);
   letter-spacing: 0.05em;
 }
+/* ===================================
+   モバイルフッターメニュー非表示
+   =================================== */
+/* LPではCocoon標準のモバイルフッターメニュー（ホーム、検索、トップ、サイドバー）を非表示にする */
+.lp-template #mobile-footer-menu-buttons,
+.lp-template .mobile-footer-menu-buttons,
+.lp-template #footer-mobile-buttons {
+  display: none !important;
+}
