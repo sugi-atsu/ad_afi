@@ -11,9 +11,12 @@
 
 /* 本文のメインエリア(#primary)を全幅にする */
 .lp-template #primary {
-    width: 100%; /* 幅を100%に設定 */
-    float: none;   /* floatを解除 */
-    margin: 0;     /* 不要なマージンをリセット */
+    width: 100%;
+    /* 幅を100%に設定 */
+    float: none;
+    /* floatを解除 */
+    margin: 0;
+    /* 不要なマージンをリセット */
 }
 
 /* ===================================
@@ -34,11 +37,11 @@ body.lp-template {
 }
 
 /* 全てのブロックの上下マージンを統一 */
-.main > .wp-block-group,
-.main > .wp-block-heading,
-.main > .wp-block-table,
-.main > .custom-cta-button,
-.main > .lp-intro-text {
+.main>.wp-block-group,
+.main>.wp-block-heading,
+.main>.wp-block-table,
+.main>.custom-cta-button,
+.main>.lp-intro-text {
     margin-bottom: 30px;
 }
 
@@ -249,13 +252,7 @@ body.lp-template {
 }
 
 .custom-cta-button::after {
-    content: "→";
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-weight: bold;
-    font-size: 1.2em;
+    display: none !important;
 }
 
 /* ===================================

@@ -3,37 +3,48 @@
    =================================== */
 .custom-cta-button {
   border-radius: 8px !important;
-  padding: 15px 30px !important;
+  padding: 12px 10px !important;
+  /* 横幅いっぱいに使うため左右パディングを調整 */
   font-weight: bold;
-  font-size: 16px;
+  font-size: 1.1rem;
+  /* デフォルトサイズ */
   transition: all 0.2s;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
   position: relative;
   text-align: center;
-  display: block;
+  display: flex !important;
+  /* 中央寄せのため */
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   border: none;
-  letter-spacing: 0.05em;
-  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-  line-height: 1.4;
+  letter-spacing: 0;
+  /* 文字が入り切るように字間をリセット */
+  font-family: inherit;
+  line-height: 1.2;
+  white-space: nowrap;
+  /* 1行に収める */
+  overflow: hidden;
+  container-type: inline-size;
+  /* コンテナクエリでレスポンシブに */
+}
+
+/* テキストコンテナ */
+.custom-cta-button span {
+  font-size: clamp(12px, 4.5cqw, 18px);
+  /* ボタン幅に合わせて縮小 */
+  display: block;
 }
 
 .custom-cta-button:hover {
-  transform: translateY(2px);
+  transform: translateY(-2px);
   opacity: 0.95;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* 矢印を削除 */
 .custom-cta-button::after {
-  content: "→";
-  position: absolute;
-  right: 25px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-weight: bold;
-  font-size: 1.2em;
-  z-index: 2;
+  display: none !important;
 }
 
-.summary-cta-button {
-  /* サマリーランキング内のCTAボタンのスタイルはこちらに記述 */
-}
+/* サマリーランキング内のCTAボタンのスタイルが必要な場合はここに追加 */

@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
       tableHTML += "<tr><td></td>";
       items.forEach((item) => {
         tableHTML += `<td><a href="${item.affiliateLink || "#"
-          }" class="custom-cta-button" target="_blank" rel="noopener sponsored">公式サイトへ</a></td>`;
+          }" class="custom-cta-button" target="_blank" rel="noopener sponsored"><span>公式サイトへ</span></a></td>`;
       });
       tableHTML += "</tr>";
 
@@ -301,7 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // CTAセル
         html += `
           <div class="comparison-cell comparison-cta-cell">
-             <a href="${item.affiliateLink || '#'}" class="comparison-cta-btn lp-track-cta" target="_blank" rel="noopener sponsored">公式サイト</a>
+             <a href="${item.affiliateLink || '#'}" class="comparison-cta-btn lp-track-cta" target="_blank" rel="noopener sponsored"><span>公式サイト</span></a>
           </div>
         `;
 
@@ -482,8 +482,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         <p class="ranking-card__cta-microcopy">${item.ctaMicrocopy || ""
           }</p>
                         <a href="${item.affiliateLink || "#"
-          }" class="custom-cta-button ranking-card__cta-button lp-track-cta" target="_blank" rel="noopener sponsored">${item.ctaButtonText || item.productName + "で詳しく見てみる"
-          }</a>
+          }" class="custom-cta-button ranking-card__cta-button lp-track-cta" target="_blank" rel="noopener sponsored"><span>${item.ctaButtonText || item.productName + "で詳しく見てみる"
+          }</span></a>
                     </div>
                 </div>
             `;

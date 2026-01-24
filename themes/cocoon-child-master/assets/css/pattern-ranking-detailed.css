@@ -297,11 +297,13 @@
 }
 
 .ranking-card__cta-button {
-  font-size: 24px !important;
-  padding: 20px 30px !important;
   position: relative;
   overflow: hidden;
   z-index: 0;
+  width: 100%;
+  max-width: 400px;
+  /* あまり広がりすぎないように */
+  margin: 0 auto;
 }
 
 /* ★★★ここからが今回の修正箇所★★★ */
@@ -504,8 +506,6 @@
   }
 
   .ranking-card__cta-button {
-    font-size: 18px !important;
-    padding: 15px !important;
     width: 100%;
     /* ボタンを全幅に */
     box-sizing: border-box;
