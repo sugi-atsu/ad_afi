@@ -315,8 +315,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const hintHtml = `
         <div class="scroll-hint-overlay">
             <div class="scroll-hint-content">
-                <span>横へスクロール</span>
                 <div class="scroll-hint-icon"></div>
+                <div class="scroll-hint-text">スクロールできます</div>
             </div>
         </div>
       `;

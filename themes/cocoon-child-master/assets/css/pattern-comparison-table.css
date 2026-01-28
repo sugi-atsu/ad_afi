@@ -61,7 +61,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: 15px;
   text-align: center;
   box-sizing: border-box;
 }
@@ -78,9 +78,9 @@
    商材カラム
    =================================== */
 .comparison-product-column {
-  flex: 0 0 200px;
-  /* 商材ごとの幅 */
-  width: 200px;
+  flex: 0 0 240px;
+  /* 商材ごとの幅を200pxから引き上げ */
+  width: 240px;
   border-right: 1px solid #eee;
   background-color: #fff;
   display: flex;
@@ -130,7 +130,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   height: 120px;
   /* セルの高さを固定して揃える */
   box-sizing: border-box;
@@ -149,21 +149,24 @@
 
 /* 商材ヘッダー(画像・名前) */
 .comparison-product-header {
-  height: 220px;
+  height: 260px;
+  /* 220pxから引き上げ */
   /* 左カラムと合わせる */
-  padding: 15px 10px;
+  padding: 15px 5px;
+  /* 横パディングを削減 */
   border-bottom: 2px solid #3366cc;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .comparison-product-logo {
   width: 100%;
-  height: 140px;
-  margin-bottom: 10px;
+  height: 180px;
+  /* 140pxから引き上げ */
+  margin-bottom: 5px;
 }
 
 .comparison-product-logo a {
@@ -175,10 +178,9 @@
 }
 
 .comparison-product-logo img {
-  max-width: 100%;
-  max-height: 100%;
-  width: auto;
-  height: auto;
+  width: 100%;
+  /* 横幅いっぱいを基本に */
+  height: 100%;
   object-fit: contain;
 }
 
@@ -318,9 +320,9 @@
 
   /* 商材カラムの幅を調整 */
   .comparison-product-column {
-    flex: 0 0 140px;
-    /* 少し狭くして画面に多く入るように */
-    width: 140px;
+    flex: 0 0 180px;
+    /* 160pxからさらに引き上げ */
+    width: 180px;
   }
 
   /* フォントサイズの全体縮小 */
@@ -340,16 +342,21 @@
   /* 画像エリアの高さ調整 */
   .comparison-product-header,
   .comparison-index-cell.header-cell {
-    height: 150px;
-    /* ヘッダー高さを少し減らす */
+    height: 200px;
+    /* 170pxからさらに引き上げ */
+    padding: 10px 2px;
   }
 
   .comparison-product-logo {
-    height: 60px;
+    height: 140px;
+    /* 110pxからさらに引き上げ */
+    margin-bottom: 5px;
   }
 
   .comparison-product-name {
-    font-size: 12px;
+    font-size: 11px;
+    line-height: 1.2;
+    padding: 0 4px;
   }
 
   /* 評価スコア（数値） */
@@ -373,11 +380,10 @@
    =================================== */
 .scroll-hint-overlay {
   position: absolute;
-  top: 55%;
-  /* タイトルがあるため少し下にずらす */
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
+  z-index: 100;
   pointer-events: none;
   opacity: 1;
   transition: opacity 0.5s ease;
@@ -385,43 +391,50 @@
 }
 
 .scroll-hint-content {
-  background-color: rgba(33, 52, 87, 0.85);
-  /* 濃紺の半透明 */
+  background-color: rgba(0, 0, 0, 0.45);
   color: #fff;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-size: 14px;
+  padding: 15px;
+  border-radius: 12px;
+  font-size: 13px;
   font-weight: bold;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  white-space: nowrap;
+  justify-content: center;
+  width: 130px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(3px);
 }
 
 .scroll-hint-icon {
-  width: 24px;
-  height: 24px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffffff'%3E%3Cpath d='M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z'/%3E%3C/svg%3E");
+  width: 80px;
+  height: 60px;
+  background-image: url("https://cp01.rescareer.com/wp-content/uploads/2026/01/image2026012818535900.png");
   background-repeat: no-repeat;
   background-position: center;
-  animation: hint-slide 1.5s infinite;
+  background-size: contain;
+  margin-bottom: 8px;
+  animation: hint-scroll-x 2s infinite ease-in-out;
+  filter: brightness(0) invert(1);
+  opacity: 0.8;
 }
 
-@keyframes hint-slide {
+.scroll-hint-text {
+  white-space: nowrap;
+  letter-spacing: 0.05em;
+}
+
+@keyframes hint-scroll-x {
   0% {
-    transform: translateX(-5px);
-    opacity: 0.5;
+    transform: translateX(-8px);
   }
 
   50% {
-    transform: translateX(5px);
-    opacity: 1;
+    transform: translateX(8px);
   }
 
   100% {
-    transform: translateX(-5px);
-    opacity: 0.5;
+    transform: translateX(-8px);
   }
 }
 

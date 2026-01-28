@@ -23,9 +23,16 @@
    LPテンプレート共通 基本設定
    =================================== */
 body.lp-template {
-  font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 1.7;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-size: 16px;
+  line-height: 1.8;
+  color: #333;
+}
+
+/* 段落のデフォルトサイズを確保 */
+.lp-template p {
+  font-size: 16px;
+  margin-bottom: 1.5em;
 }
 
 /* 全てのブロックの上下マージンを統一 */
@@ -44,7 +51,7 @@ body.lp-template {
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.8;
 }
 
@@ -80,6 +87,7 @@ body.lp-template {
   box-shadow: 1px 1px 2px rgba(0%, 0%, 0%, 0.2);
   letter-spacing: 0.05em;
 }
+
 /* ===================================
    モバイルフッターメニュー非表示
    =================================== */
@@ -88,4 +96,36 @@ body.lp-template {
 .lp-template .mobile-footer-menu-buttons,
 .lp-template #footer-mobile-buttons {
   display: none !important;
+}
+
+/* ===================================
+   スマホ表示時のテキスト余白調整
+   =================================== */
+@media screen and (max-width: 768px) {
+
+  /* サイトメイン全体に余白を設定 */
+  .lp-template .site-main {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  /* 画像や一部の大きなブロックは全幅を維持するように調整 */
+  .lp-template .site-main>.wp-block-image,
+  .lp-template .site-main>figure,
+  .lp-template .site-main>.lp-section,
+  .lp-template .site-main>.lp-summary-ranking,
+  .lp-template .site-main>.comparison-section,
+  .lp-template .site-main>.lp-summary-ranking {
+    margin-left: -15px !important;
+    margin-right: -15px !important;
+    width: calc(100% + 30px) !important;
+    max-width: none !important;
+  }
+
+  /* セクションタイトルの横幅調整（パディング分を考慮） */
+  .lp-template .lp-section-title {
+    margin-left: -20px !important;
+    margin-right: -20px !important;
+    width: calc(100% + 40px) !important;
+  }
 }

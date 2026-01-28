@@ -171,7 +171,7 @@
   padding: 10px;
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .table-item__header {
@@ -278,7 +278,7 @@
 
 /* テキスト本文 */
 .product-detail__text {
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.8;
   /* 行間を広めに取って読みやすさを確保 */
 }

@@ -181,6 +181,44 @@ function save_ranking_lp_meta_box_data($post_id, $post)
     }
 }
 add_action('save_post_page', 'save_ranking_lp_meta_box_data', 10, 2);
+
+/****************************************
+ * GTM ID設定メタボックス (全固定ページ用)
+ ****************************************/
+function setup_gtm_meta_box() {
+    add_meta_box(
+        'page_gtm_id_meta_box',
+        'GTM設定',
+        'show_gtm_id_meta_box_html',
+        'page',
+        'side',
+        'default'
+    );
+}
+add_action('add_meta_boxes', 'setup_gtm_meta_box');
+
+function show_gtm_id_meta_box_html($post) {
+    wp_nonce_field('save_gtm_id_action', 'gtm_id_nonce');
+    $gtm_id = get_post_meta($post->ID, '_custom_gtm_id', true);
+    ?>
+    <p>
+        <label for="custom-gtm-id">GTM ID:</label><br>
+        <input type="text" name="custom_gtm_id" id="custom-gtm-id" value="<?php echo esc_attr($gtm_id); ?>" placeholder="GTM-XXXXXXX" style="width: 100%;">
+    </p>
+    <p class="description">GTM IDを入力したページのみ、GTMコードが出力されます。空欄の場合はGTMは設置されません。</p>
+    <?php
+}
+
+function save_gtm_id_meta_data($post_id) {
+    if (!isset($_POST['gtm_id_nonce']) || !wp_verify_nonce($_POST['gtm_id_nonce'], 'save_gtm_id_action')) return;
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+    if (!current_user_can('edit_page', $post_id)) return;
+
+    if (isset($_POST['custom_gtm_id'])) {
+        update_post_meta($post_id, '_custom_gtm_id', sanitize_text_field($_POST['custom_gtm_id']));
+    }
+}
+add_action('save_post', 'save_gtm_id_meta_data');
 // ★★★ ここまで ★★★
 
 function load_lp_admin_scripts($hook)

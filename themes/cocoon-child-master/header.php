@@ -18,11 +18,17 @@ if (!defined('ABSPATH'))
   <meta name="format-detection" content="telephone=no">
 
 <!-- Google Tag Manager -->
+<?php
+$current_id = get_queried_object_id();
+$gtm_id = get_post_meta($current_id, '_custom_gtm_id', true);
+if ($gtm_id):
+?>
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-MKMKJ49Z');</script>
+})(window,document,'script','dataLayer','<?php echo esc_js($gtm_id); ?>');</script>
+<?php endif; ?>
 <!-- End Google Tag Manager -->
 
   <?php //ヘッドタグ内挿入用のアクセス解析用テンプレート
@@ -74,8 +80,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <body <?php body_class(); ?> itemscope itemtype="https://schema.org/WebPage">
   <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MKMKJ49Z"
+<?php if ($gtm_id): ?>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo esc_attr($gtm_id); ?>"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<?php endif; ?>
 <!-- End Google Tag Manager (noscript) -->
 
   <?php //body最初に挿入するアクセス解析ヘッダータグの取得
