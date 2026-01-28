@@ -29,6 +29,10 @@ function initialize_lp_system()
     // ブロックパターンカテゴリの登録（★を付けて上部に表示されやすくする）
     register_block_pattern_category('lp-parts', array('label' => '★LP専用パーツ'));
 
+    // キャッシュをクリア（ファイル削除を反映させるため、一度だけ実行）
+    if (is_admin()) {
+        delete_transient('auto_registered_patterns');
+    }
 }
 add_action('init', 'initialize_lp_system', 5);
 
@@ -101,8 +105,9 @@ function show_ranking_lp_meta_box_html($post)
 {
     wp_nonce_field('save_ranking_data_action', 'ranking_data_nonce');
     $json_data = get_post_meta($post->ID, '_cl_ranking_lp_data', true);
-    $section_title = get_post_meta($post->ID, '_cl_ranking_lp_section_title', true); // タイトル取得
-    $comparison_title = get_post_meta($post->ID, '_cl_ranking_lp_comparison_title', true); // 比較表タイトル取得
+    $section_title = get_post_meta($post->ID, '_cl_ranking_lp_section_title', true); 
+    $comparison_title = get_post_meta($post->ID, '_cl_ranking_lp_comparison_title', true);
+
     $template_path = get_stylesheet_directory() . '/meta-box-templates/ranking-lp-meta-box.php';
     if (file_exists($template_path)) {
         require($template_path);
